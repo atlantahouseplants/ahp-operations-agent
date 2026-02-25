@@ -1,0 +1,21 @@
+{
+  "form_data": {
+    "Select Client Account": "Iris O4W",
+    "Is New Client": false,
+    "Service Date": "2026-02-25",
+    "Arrival Time": "09:30",
+    "Departure Time": "10:15",
+    "Completed by": "Bri Finley",
+    "Services Performed Today": ["Watered plants", "Pruned/trimmed plants", "Removed dead leaves/debris"],
+    "Any Issues or Concerns?": ["None - everything looks great"],
+    "Overall Account Plant Health": "Good - Plants healthy, minor maintenance needed",
+    "Is This Account Up To AHP Standards?": "Yes",
+    "Service Notes & Details": "All plants looking healthy. Rotated ficus near window. Noticed new growth on the snake plants — looking great. Clients commented they love the lobby setup.",
+    "List Replacements Needed": "",
+    "Replacement Date": "",
+    "Submission Timestamp": "2026-02-25T14:30:00.000Z",
+    "Service Photo Count": 2,
+    "Social Media Photo Count": 1,
+    "Replacement Photo Count": 0
+  }
+}

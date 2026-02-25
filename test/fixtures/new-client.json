@@ -1,0 +1,21 @@
+{
+  "form_data": {
+    "Select Client Account": "New Test Client LLC",
+    "Is New Client": true,
+    "Service Date": "2026-02-25",
+    "Arrival Time": "14:30",
+    "Departure Time": "15:45",
+    "Completed by": "Bri Finley",
+    "Services Performed Today": ["Watered plants", "Pruned/trimmed plants", "Removed dead leaves/debris", "Cleaned containers/pots"],
+    "Any Issues or Concerns?": ["None - everything looks great"],
+    "Overall Account Plant Health": "Good - Plants healthy, minor maintenance needed",
+    "Is This Account Up To AHP Standards?": "Yes",
+    "Service Notes & Details": "First service visit for this new client. They have about 20 plants across their two-floor office in Midtown — mix of pothos, snake plants, ZZ plants, and a few dracaenas. Plants were a bit neglected by previous provider but nothing that can't be recovered in a few weeks. Met office manager Lisa Chen. She wants recap emails after every visit. Took stock photos of all plant locations for our records.",
+    "List Replacements Needed": "",
+    "Replacement Date": "",
+    "Submission Timestamp": "2026-02-25T19:50:00.000Z",
+    "Service Photo Count": 5,
+    "Social Media Photo Count": 2,
+    "Replacement Photo Count": 0
+  }
+}

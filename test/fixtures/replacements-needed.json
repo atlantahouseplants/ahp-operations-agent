@@ -1,0 +1,21 @@
+{
+  "form_data": {
+    "Select Client Account": "Perkins & Will",
+    "Is New Client": false,
+    "Service Date": "2026-02-25",
+    "Arrival Time": "10:00",
+    "Departure Time": "11:00",
+    "Completed by": "Bri Finley",
+    "Services Performed Today": ["Watered plants", "Pruned/trimmed plants", "Removed dead leaves/debris"],
+    "Any Issues or Concerns?": ["None - everything looks great"],
+    "Overall Account Plant Health": "Good - Plants healthy, minor maintenance needed",
+    "Is This Account Up To AHP Standards?": "Yes",
+    "Service Notes & Details": "Good visit overall. Most plants are thriving. However several plants need to be swapped out — they've been declining slowly and are past the point of recovery. Logged replacements below.",
+    "List Replacements Needed": "6 inch pothos in the lobby reception desk is completely dead — soil bone dry and stems gone mushy. 10 inch bird of paradise in the main conference room has broken its main stem — too damaged to recover, needs a full replacement. 4 inch ZZ plant on the windowsill in office 214 has yellowed out entirely. About 3 of the small succulent arrangements near the elevator lobby need refreshing — dried out past saving.",
+    "Replacement Date": "2026-03-04",
+    "Submission Timestamp": "2026-02-25T15:05:00.000Z",
+    "Service Photo Count": 2,
+    "Social Media Photo Count": 0,
+    "Replacement Photo Count": 4
+  }
+}

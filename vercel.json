@@ -1,0 +1,7 @@
+{
+  "functions": {
+    "api/process-visit.js": {
+      "maxDuration": 60
+    }
+  }
+}

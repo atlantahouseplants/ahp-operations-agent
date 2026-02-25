@@ -1,0 +1,21 @@
+{
+  "form_data": {
+    "Select Client Account": "Concord Group",
+    "Is New Client": false,
+    "Service Date": "2026-02-25",
+    "Arrival Time": "13:00",
+    "Departure Time": "14:30",
+    "Completed by": "Bri Finley",
+    "Services Performed Today": ["Watered plants", "Pest treatment applied", "Removed dead leaves/debris", "Pruned/trimmed plants"],
+    "Any Issues or Concerns?": ["Pest infestation detected", "Overwatering evident", "Container drainage issues"],
+    "Overall Account Plant Health": "Poor - Issues require attention",
+    "Is This Account Up To AHP Standards?": "No",
+    "Service Notes & Details": "This account is in bad shape. Spider mites found on fiddle leaf figs on the 4th floor — webbing visible on most leaves. Standing water under the conference room planters from a broken drainage insert — root rot starting on the pothos. Bacterial leaf spot spreading on the aglaonema in reception. Applied systemic insecticide. Removed worst infected material. The drainage issue needs to be fixed within the week or we'll lose the conference room plants entirely.",
+    "List Replacements Needed": "",
+    "Replacement Date": "",
+    "Submission Timestamp": "2026-02-25T18:35:00.000Z",
+    "Service Photo Count": 6,
+    "Social Media Photo Count": 0,
+    "Replacement Photo Count": 0
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "form_data": {
+    "Select Client Account": "Marriott Perimeter Center",
+    "Is New Client": false,
+    "Service Date": "2026-02-25",
+    "Arrival Time": "08:00",
+    "Departure Time": "09:30",
+    "Completed by": "Bri Finley",
+    "Services Performed Today": ["Watered plants", "Pruned/trimmed plants", "Removed dead leaves/debris", "Cleaned containers/pots"],
+    "Any Issues or Concerns?": ["Low light conditions affecting plants", "Container drainage issues"],
+    "Overall Account Plant Health": "Good - Plants healthy, minor maintenance needed",
+    "Is This Account Up To AHP Standards?": "No",
+    "Service Notes & Details": "Several lobby plants are not at AHP presentation standards. The peace lilies near check-in have brown tips from the AC vent directly above. The containers in the conference wing are visibly salt-stained. The facilities team moved two large dracaenas into a dark corner without telling us — they need to go back. Overall plant health is OK but the visual presentation is below what we should be delivering for a hotel property.",
+    "List Replacements Needed": "",
+    "Replacement Date": "",
+    "Submission Timestamp": "2026-02-25T13:45:00.000Z",
+    "Service Photo Count": 4,
+    "Social Media Photo Count": 0,
+    "Replacement Photo Count": 0
+  }
+}
