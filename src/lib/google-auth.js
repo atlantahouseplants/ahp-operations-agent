@@ -1,66 +1,59 @@
 /**
- * Google API authentication.
+ * Google API authentication — OAuth 2.0 with refresh token.
  *
- * Two auth clients are exported:
+ * Instead of a service account JSON key (blocked by org policy), this uses
+ * an OAuth 2.0 client credential + refresh token obtained once via the
+ * scripts/get-refresh-token.js setup script.
  *
- * 1. `getServiceAccountAuth()` — Standard service account auth for Sheets and Drive.
- *    Access is granted by sharing resources with the service account email.
+ * The refresh token authorizes the agent to act as the Google Workspace user
+ * (service@atlantahouseplants.com) directly — no domain-wide delegation needed.
  *
- * 2. `getGmailAuth()` — JWT client with domain-wide delegation for Gmail.
- *    This impersonates the GOOGLE_WORKSPACE_USER so emails are sent from that address.
- *    Requires domain-wide delegation to be configured in Google Workspace Admin.
- *
- * The service account JSON key is stored in GOOGLE_SERVICE_ACCOUNT_KEY env var
- * as a stringified JSON object (no newlines in the env var value).
+ * Required env vars:
+ *   GOOGLE_CLIENT_ID      — from GCP Console → OAuth 2.0 Client IDs
+ *   GOOGLE_CLIENT_SECRET  — same credential
+ *   GOOGLE_REFRESH_TOKEN  — obtained once via scripts/get-refresh-token.js
  */
 
-import { GoogleAuth, JWT } from 'google-auth-library';
+import { OAuth2Client } from 'google-auth-library';
 
-let _credentials = null;
+let _client = null;
 
-function getCredentials() {
-  if (_credentials) return _credentials;
-  const raw = process.env.GOOGLE_SERVICE_ACCOUNT_KEY;
-  if (!raw || raw === 'PLACEHOLDER') {
-    throw new Error('GOOGLE_SERVICE_ACCOUNT_KEY is not configured');
+/**
+ * Returns a single shared OAuth2 client, initialized from env vars.
+ * The client automatically refreshes the access token when it expires.
+ */
+export function getOAuthClient() {
+  if (_client) return _client;
+
+  const clientId = process.env.GOOGLE_CLIENT_ID;
+  const clientSecret = process.env.GOOGLE_CLIENT_SECRET;
+  const refreshToken = process.env.GOOGLE_REFRESH_TOKEN;
+
+  if (!clientId || clientId === 'your-client-id') {
+    throw new Error('GOOGLE_CLIENT_ID is not configured. Run scripts/get-refresh-token.js first.');
   }
-  try {
-    _credentials = JSON.parse(raw);
-  } catch {
-    throw new Error('GOOGLE_SERVICE_ACCOUNT_KEY is not valid JSON');
+  if (!clientSecret || clientSecret === 'your-client-secret') {
+    throw new Error('GOOGLE_CLIENT_SECRET is not configured.');
   }
-  return _credentials;
+  if (!refreshToken || refreshToken === 'your-refresh-token') {
+    throw new Error('GOOGLE_REFRESH_TOKEN is not configured. Run scripts/get-refresh-token.js first.');
+  }
+
+  _client = new OAuth2Client(clientId, clientSecret);
+  _client.setCredentials({ refresh_token: refreshToken });
+
+  return _client;
 }
 
 /**
- * Returns a GoogleAuth client for Sheets and Drive.
- * Service account accesses resources that are shared with its email address.
+ * Returns the same OAuth client for Sheets, Gmail, and Drive.
+ * Since OAuth authorizes as the actual user, all three APIs work
+ * without any special delegation setup.
  */
 export function getServiceAccountAuth() {
-  const credentials = getCredentials();
-  return new GoogleAuth({
-    credentials,
-    scopes: [
-      'https://www.googleapis.com/auth/spreadsheets',
-      'https://www.googleapis.com/auth/drive',
-    ],
-  });
+  return getOAuthClient();
 }
 
-/**
- * Returns a JWT client for Gmail with domain-wide delegation.
- * Impersonates the GOOGLE_WORKSPACE_USER to send email from that address.
- */
 export function getGmailAuth() {
-  const credentials = getCredentials();
-  const subject = process.env.GOOGLE_WORKSPACE_USER;
-  if (!subject) {
-    throw new Error('GOOGLE_WORKSPACE_USER is not configured');
-  }
-  return new JWT({
-    email: credentials.client_email,
-    key: credentials.private_key,
-    scopes: ['https://www.googleapis.com/auth/gmail.send'],
-    subject, // impersonate this workspace user
-  });
+  return getOAuthClient();
 }

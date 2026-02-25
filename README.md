@@ -26,7 +26,7 @@ Service Form → POST /api/process-visit → Claude Agent (8–15 tool calls) �
 
 ## Google Cloud Setup
 
-You need a Google Cloud service account before the agent can access Sheets and Gmail.
+The agent uses **OAuth 2.0 with a refresh token** — no service account JSON key required (works even if your org blocks key creation).
 
 ### 1. Create project and enable APIs
 
@@ -37,41 +37,37 @@ You need a Google Cloud service account before the agent can access Sheets and G
    - Gmail API
    - Google Drive API
 
-### 2. Create service account
+### 2. Create an OAuth 2.0 Client ID
 
-1. IAM & Admin → Service Accounts → **Create Service Account**
-2. Name: `ahp-operations-agent`
-3. No project roles needed (access is granted by sharing resources)
-4. Create a **JSON key** → download it
-5. Note the service account email: `ahp-operations-agent@[project].iam.gserviceaccount.com`
+1. **APIs & Services → Credentials → Create Credentials → OAuth client ID**
+2. If prompted to configure the consent screen first:
+   - User type: **Internal**
+   - App name: `AHP Operations Agent`
+   - Support email: your email → Save
+3. Application type: **Desktop app** → Name: `AHP Agent` → Create
+4. Note the **Client ID** and **Client Secret** (or download the JSON)
 
-### 3. Share resources with the service account
-
-- **Google Sheets** (Service Records): Share → add service account email as **Editor**
-- **PROCUREMENT_MASTER** (if separate): Share that spreadsheet too
-- **Google Drive** folders: Share with service account as **Editor** if you want Drive doc creation to work
-
-### 4. Configure Gmail domain-wide delegation
-
-For the agent to send email as `service@atlantahouseplants.com`:
-
-1. In Google Cloud Console → Service Account → Edit → enable **"Domain-wide delegation"**
-2. Copy the **Client ID** (long number)
-3. Go to **Google Workspace Admin** → Security → API Controls → Domain-wide Delegation
-4. **Add new** → paste the Client ID
-5. OAuth scopes: `https://www.googleapis.com/auth/gmail.send`
-6. Save
-
-### 5. Set the environment variable
-
-Stringify the JSON key (remove all newlines) and paste as `GOOGLE_SERVICE_ACCOUNT_KEY`:
+### 3. Run the one-time auth script
 
 ```bash
-# On Mac/Linux:
-cat service-account-key.json | tr -d '\n'
+# Add Client ID and Secret to .env first, then:
+node scripts/get-refresh-token.js
+```
 
-# Or in Node:
-node -e "const k = require('./key.json'); console.log(JSON.stringify(k))"
+This opens a browser URL — sign in as `service@atlantahouseplants.com`, click Allow, paste the code back. The script prints your `GOOGLE_REFRESH_TOKEN`.
+
+### 4. Share your Sheets with your Google account
+
+The agent accesses Sheets as **you** (whoever authorized the OAuth flow), so your account already has access. No sharing needed if you own the spreadsheet.
+
+### 5. Set environment variables
+
+Add to `.env` and Vercel dashboard:
+
+```
+GOOGLE_CLIENT_ID=...
+GOOGLE_CLIENT_SECRET=...
+GOOGLE_REFRESH_TOKEN=...
 ```
 
 ---
